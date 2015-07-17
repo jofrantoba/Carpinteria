@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cotizacion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idproyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT p.`descripcion` as PROYECTO,p.`fecha` AS FECHA,p.`monto` AS PRECIOPROYECTO,
+c.`descripcion` AS COSTO,pc.`monto` as PRECIOCOSTO,
+pc.`cantidad` AS CANTIDAD,pc.`monto`*pc.`cantidad` AS SUBTOTAL FROM
+proyectocosto pc INNER JOIN proyecto p ON pc.`idproyecto`=p.`idproyecto` INNER JOIN costo c ON
+  c.`idcosto`=pc.`idcosto` WHERE pc.idproyecto=$P{idproyecto};]]>
+	</queryString>
+	<field name="PROYECTO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FECHA" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PRECIOPROYECTO" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COSTO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PRECIOCOSTO" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CANTIDAD" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SUBTOTAL" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="COSTO_TOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUBTOTAL}]]></variableExpression>
+	</variable>
+	<variable name="PRECIO_PROY" class="java.math.BigDecimal" calculation="Average">
+		<variableExpression><![CDATA[$F{PRECIOPROYECTO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="146" y="0" width="263" height="27" forecolor="#FF0000"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[CARPINTERIA Y EBANISTERIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="27" width="115" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cristo es mi Rey]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="10" width="135" height="15"/>
+				<textElement/>
+				<text><![CDATA[NOMBRE DEL PROYECTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="156" y="10" width="370" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PROYECTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="35" width="40" height="14"/>
+				<textElement/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="56" y="35" width="470" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{FECHA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="57" width="135" height="14"/>
+				<textElement/>
+				<text><![CDATA[COSTO DEL PROYECTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="146" y="57" width="157" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECIOPROYECTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="2" width="252" height="20" backcolor="#FF9900"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[DESCRIPCION DEL COSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="254" y="3" width="100" height="18" backcolor="#FF9900"/>
+				<textElement textAlignment="Center" lineSpacing="Single" markup="none">
+					<font isBold="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="355" height="1"/>
+			</line>
+			<line>
+				<reportElement x="228" y="2" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="21" width="355" height="1"/>
+			</line>
+			<line>
+				<reportElement x="354" y="2" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="356" y="2" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="355" y="21" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="456" y="2" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="456" y="21" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="554" y="2" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="355" y="3" width="102" height="18" backcolor="#FF9900"/>
+				<textElement textAlignment="Center">
+					<font isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PRECIO UNITARIO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="456" y="2" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="457" y="3" width="97" height="18" backcolor="#FF9900"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[SUB TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="0" y="0" width="228" height="29" backcolor="#FFFF99"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{COSTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="228" y="1" width="126" height="29" backcolor="#FFFF99"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="354" y="1" width="100" height="28" backcolor="#FFFF99"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECIOCOSTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="454" y="1" width="100" height="28" backcolor="#FFFF99"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="29" width="552" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="0" width="452" height="20" backcolor="#CCCCFF"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COSTO TOTAL]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0.00">
+				<reportElement mode="Opaque" x="454" y="0" width="100" height="20" backcolor="#CCFFFF"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{COSTO_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00">
+				<reportElement mode="Opaque" x="454" y="28" width="100" height="22" backcolor="#FF6600"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{PRECIO_PROY}-$V{COSTO_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="28" width="452" height="22" backcolor="#6666FF"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UTILIDAD:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
