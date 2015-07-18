@@ -5,4 +5,7 @@ JDK 8, Tomcat 8 y Mysql 5.x
 
 Actualizado con el IDE Netbeans 8.x
 
+El script de base de datos se encuentra dentro del proyecto en una carpeta 
+llamada "data", logear en mysql y ejecutar el script.
+
 Disfruten del codigo.
