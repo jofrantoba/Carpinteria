@@ -1,0 +1,124 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="cotizacion" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b386a8d2-b452-446b-b36d-c95338582352">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idproyecto" class="java.lang.Integer"/>
+	<query language="sql"><![CDATA[SELECT p.`descripcion` as PROYECTO,p.`fecha` AS FECHA,p.`monto` AS PRECIOPROYECTO,
+c.`descripcion` AS COSTO,pc.`monto` as PRECIOCOSTO,
+pc.`cantidad` AS CANTIDAD,pc.`monto`*pc.`cantidad` AS SUBTOTAL FROM
+proyectocosto pc INNER JOIN proyecto p ON pc.`idproyecto`=p.`idproyecto` INNER JOIN costo c ON
+  c.`idcosto`=pc.`idcosto` WHERE pc.idproyecto=$P{idproyecto};]]></query>
+	<field name="PROYECTO" class="java.lang.String">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="FECHA" class="java.sql.Date">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="PRECIOPROYECTO" class="java.math.BigDecimal">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="COSTO" class="java.lang.String">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="PRECIOCOSTO" class="java.math.BigDecimal">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="CANTIDAD" class="java.math.BigDecimal">
+		<description><![CDATA[]]></description>
+	</field>
+	<field name="SUBTOTAL" class="java.math.BigDecimal">
+		<description><![CDATA[]]></description>
+	</field>
+	<variable name="COSTO_TOTAL" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{SUBTOTAL}]]></expression>
+	</variable>
+	<variable name="PRECIO_PROY" calculation="Average" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{PRECIOPROYECTO}]]></expression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="48" splitType="Stretch">
+		<element kind="staticText" uuid="ed57368c-c9b5-442c-a93e-b31bff2ef0fe" x="146" y="0" width="263" height="27" forecolor="#FF0000" fontSize="18.0">
+			<text><![CDATA[CARPINTERIA Y EBANISTERIA]]></text>
+		</element>
+		<element kind="staticText" uuid="3d9b792e-83cc-40c9-ad5e-5fdd819cc60b" x="228" y="27" width="115" height="20" fontSize="14.0" bold="true">
+			<text><![CDATA[Cristo es mi Rey]]></text>
+		</element>
+	</title>
+	<pageHeader height="76" splitType="Stretch">
+		<element kind="staticText" uuid="3ecc0c23-6988-4f2b-831e-13a8931a7f78" x="11" y="10" width="135" height="15">
+			<text><![CDATA[NOMBRE DEL PROYECTO:]]></text>
+		</element>
+		<element kind="textField" uuid="5766bb01-4d6a-4392-832f-825a9db35fa9" x="156" y="10" width="370" height="15">
+			<expression><![CDATA[$F{PROYECTO}]]></expression>
+		</element>
+		<element kind="staticText" uuid="49b57a88-00fd-4999-80c7-8e2a129c5741" x="11" y="35" width="40" height="14">
+			<text><![CDATA[FECHA:]]></text>
+		</element>
+		<element kind="textField" uuid="fb4f7fdd-604a-4960-aefd-273e500b061e" x="56" y="35" width="470" height="14" pattern="dd/MM/yyyy">
+			<expression><![CDATA[$F{FECHA}]]></expression>
+		</element>
+		<element kind="staticText" uuid="3c70dacc-613d-4e19-a6fd-f837d8e5f4b3" x="11" y="57" width="135" height="14">
+			<text><![CDATA[COSTO DEL PROYECTO:]]></text>
+		</element>
+		<element kind="textField" uuid="f791f1a6-2f79-44df-b73d-381b7a5c722f" x="146" y="57" width="157" height="14">
+			<expression><![CDATA[$F{PRECIOPROYECTO}]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="22" splitType="Stretch">
+		<element kind="staticText" uuid="9e7584cd-be51-479d-abc2-a94080f762c0" mode="Opaque" x="2" y="2" width="252" height="20" backcolor="#FF9900" hTextAlign="Center">
+			<text><![CDATA[DESCRIPCION DEL COSTO]]></text>
+		</element>
+		<element kind="staticText" uuid="049f0ea7-6f73-40dd-8c61-2b76e0f9628f" mode="Opaque" x="254" y="3" width="100" height="18" backcolor="#FF9900" markup="none" bold="false" strikeThrough="false" hTextAlign="Center">
+			<paragraph lineSpacing="Single"/>
+			<text><![CDATA[CANTIDAD]]></text>
+		</element>
+		<element kind="line" uuid="f3c95fb9-7a93-4b7c-aee4-936e19fcf5a3" x="0" y="2" width="355" height="1"/>
+		<element kind="line" uuid="06cf8cf6-0b66-4421-a58c-3410187fe283" x="228" y="2" width="1" height="19"/>
+		<element kind="line" uuid="f83e26c3-1149-45da-aefc-336e9420d853" x="0" y="21" width="355" height="1"/>
+		<element kind="line" uuid="43972a63-2be3-4bf8-b24b-bb75c454a22c" x="354" y="2" width="1" height="19"/>
+		<element kind="line" uuid="97db345c-6538-4b93-96b1-f30d991d4ca1" x="356" y="2" width="100" height="1"/>
+		<element kind="line" uuid="c6963112-e423-40eb-9c64-8cf3b8296f01" x="355" y="21" width="100" height="1"/>
+		<element kind="line" uuid="b84c4700-932c-4af8-bc5e-79a5cbd006a5" x="456" y="2" width="100" height="1"/>
+		<element kind="line" uuid="af1236d2-ec9f-4503-b229-cdf0b1c44c13" x="456" y="21" width="100" height="1"/>
+		<element kind="line" uuid="e3aadb93-6ecd-457b-a03e-1dad58dbce40" x="554" y="2" width="1" height="19"/>
+		<element kind="staticText" uuid="476c9b93-4654-4540-85c9-ba22691850e0" mode="Opaque" x="355" y="3" width="102" height="18" backcolor="#FF9900" underline="false" hTextAlign="Center">
+			<text><![CDATA[PRECIO UNITARIO]]></text>
+		</element>
+		<element kind="line" uuid="470cbc5f-b61e-4b15-b96c-785b37ead08c" x="456" y="2" width="1" height="19"/>
+		<element kind="staticText" uuid="a4d4e20a-57fa-48bd-89f7-8860c445e203" mode="Opaque" x="457" y="3" width="97" height="18" backcolor="#FF9900" hTextAlign="Center">
+			<text><![CDATA[SUB TOTAL]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<element kind="textField" uuid="067aed21-a59f-47a0-b58f-e50a0d4037d2" mode="Transparent" x="0" y="0" width="228" height="29" backcolor="#FFFF99" textAdjust="StretchHeight" hTextAlign="Justified" vTextAlign="Bottom">
+				<expression><![CDATA[$F{COSTO}]]></expression>
+			</element>
+			<element kind="textField" uuid="22e10d7e-2347-4c1e-9754-7ad81c02b593" mode="Transparent" x="228" y="1" width="126" height="29" backcolor="#FFFF99" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Bottom">
+				<expression><![CDATA[$F{CANTIDAD}]]></expression>
+			</element>
+			<element kind="textField" uuid="fd4ca76d-e911-4578-9140-e2e06cc3d75f" mode="Transparent" x="354" y="1" width="100" height="28" backcolor="#FFFF99" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Bottom">
+				<expression><![CDATA[$F{PRECIOCOSTO}]]></expression>
+			</element>
+			<element kind="textField" uuid="7706cedb-13b2-45d3-881a-10281b44da8c" mode="Transparent" x="454" y="1" width="100" height="28" backcolor="#FFFF99" pattern="###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Bottom">
+				<expression><![CDATA[$F{SUBTOTAL}]]></expression>
+			</element>
+			<element kind="line" uuid="68640a17-ed72-4d81-b7c5-df5a86c1ed0c" x="2" y="29" width="552" height="1"/>
+		</band>
+	</detail>
+	<summary height="52" splitType="Stretch">
+		<element kind="staticText" uuid="1ae15482-ac09-4f55-93e6-b996438fc783" mode="Opaque" x="2" y="0" width="452" height="20" backcolor="#CCCCFF" fontSize="13.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[COSTO TOTAL]]></text>
+		</element>
+		<element kind="textField" uuid="7f5cceba-a46f-434d-9d39-8c39d63a55d0" mode="Opaque" x="454" y="0" width="100" height="20" backcolor="#CCFFFF" textAdjust="StretchHeight" pattern="###0.00" hTextAlign="Center">
+			<expression><![CDATA[$V{COSTO_TOTAL}]]></expression>
+		</element>
+		<element kind="textField" uuid="b10b12fa-d790-4b3f-954c-919624956337" mode="Opaque" x="454" y="28" width="100" height="22" backcolor="#FF6600" fontSize="12.0" textAdjust="StretchHeight" pattern="###0.00" bold="true" hTextAlign="Center">
+			<expression><![CDATA[$V{PRECIO_PROY}.subtract($V{COSTO_TOTAL})]]></expression>
+		</element>
+		<element kind="staticText" uuid="79328892-0c91-4826-bd91-a27a509a48b4" mode="Opaque" x="2" y="28" width="452" height="22" backcolor="#6666FF" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[UTILIDAD:]]></text>
+		</element>
+	</summary>
+</jasperReport>

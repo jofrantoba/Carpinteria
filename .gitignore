@@ -1,1 +1,5 @@
 build/
+target/
+workspace/
+netbeans_carpinteria.bat
+nb-configuration.xml
