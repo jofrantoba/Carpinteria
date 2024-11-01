@@ -5,15 +5,32 @@
     <artifactId>Carpinteria</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>Carpinteria-1.0.0</name>
-    
+    <name>Carpinteria-1.0.0</name>    
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>10.0.0</jakartaee>
+        <version.jakarta.servlet.jsp.jstl-api>3.0.2</version.jakarta.servlet.jsp.jstl-api>
+        <version.jakarta.servlet.jsp.jstl>3.0.1</version.jakarta.servlet.jsp.jstl>
+        <version.mysql-connector-j>9.1.0</version.mysql-connector-j>
+        <version.jasperreports>7.0.1</version.jasperreports>
+        <version.jasperreports-pdf>7.0.1</version.jasperreports-pdf>
+        <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
+        <version.maven-war-plugin>3.4.0</version.maven-war-plugin>
+        <version.maven-dependency-plugin>3.8.0</version.maven-dependency-plugin>
+        <version.slf4j-api>2.0.13</version.slf4j-api>
+        <version.slf4j-simple>2.0.13</version.slf4j-simple>
+        <version.log4j-api>2.21.1</version.log4j-api>
+        <version.log4j-core>2.21.1</version.log4j-core>
+        <version.junit-platform-launcher>1.8.0-M1</version.junit-platform-launcher>
+        <version.junit-jupiter-engine>5.8.0-M1</version.junit-jupiter-engine>
+        <version.junit-vintage-engine>5.8.0-M1</version.junit-vintage-engine>
+        <version.hamcrest-library>2.2</version.hamcrest-library>
+        <version.mockito-all>2.0.2-beta</version.mockito-all>  
+        <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>        
     </properties>
     
     <dependencies>
@@ -26,27 +43,83 @@
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <version>3.0.2</version>
+            <version>${version.jakarta.servlet.jsp.jstl-api}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.1</version>
+            <version>${version.jakarta.servlet.jsp.jstl}</version>
         </dependency>  
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
-            <version>9.1.0</version>
+            <version>${version.mysql-connector-j}</version>
         </dependency>  
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>7.0.1</version>
+            <version>${version.jasperreports}</version>
         </dependency>   
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-pdf</artifactId>
-            <version>7.0.1</version>
+            <version>${version.jasperreports-pdf}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${version.slf4j-simple}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${version.log4j-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${version.log4j-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${version.junit-platform-launcher}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${version.junit-jupiter-engine}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${version.junit-vintage-engine}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>${version.hamcrest-library}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${version.mockito-all}</version>     
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
@@ -55,10 +128,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>${version.maven-compiler-plugin}</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -67,7 +140,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${version.maven-war-plugin}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -75,7 +148,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${version.maven-dependency-plugin}</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -96,6 +169,17 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.maven-surefire-plugin}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <propertyName>log4j2.disable.jmx</propertyName>
+                        <propertyValue>false</propertyValue>                        
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
